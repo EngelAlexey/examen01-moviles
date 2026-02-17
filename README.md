@@ -1,97 +1,37 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+Bitácora de Consultas a IA (Formato APA 7)
+Curso: ITI-721 - Desarrollo de Aplicaciones para Dispositivos Móviles II 
+Fecha: 16 de febrero de 2026 
+Herramienta utilizada: Google Gemini
+Referencia Bibliográfica Base
+De acuerdo con las normas APA 7ª edición para citar modelos de Inteligencia Artificial Generativa:
+Google. (2026). Gemini (Versión 16 de febrero) Gemini-3.0-Pro. https://gemini.google.com/
+Registro de Prompts Utilizados
+1. Planificación y Análisis del Examen
+Prompt:
+"Analiza el siguiente documento de la prueba, realiza un plan de ejecución técnica y detallada para la resolución del mismo. Aplicando todas las reglas e instrucciones que indica en el documento."
+Justificación: Se utilizó la IA para descomponer los requisitos del archivo PDF Examen_01b.pdf y generar una estrategia de gestión de tiempo (timeboxing) y arquitectura técnica, asegurando el cumplimiento de todos los puntos de evaluación en el tiempo límite.
+Cita en el texto (Narrativa): Google (2026) sugirió una estructura de carpetas y un cronograma de 3 horas y 40 minutos para abordar el desarrollo...
+Cita en el texto (Parentética): (Google, 2026)
+2. Generación de Documentación APA
+Prompt:
+"En la última parte hay una parte que solicita convertir en formato APA todas las preguntas y respuestas, puedes generar otro archivo que contenga todos los prompts que vayamos utilizando transformados a formato APA 7"
+Justificación: Solicitud para automatizar la creación de la bitácora de documentación externa requerida en el punto 8 del examen, garantizando el formato correcto de las citas.
+Cita en el texto (Parentética): (Google, 2026)
+Estructura incial del proyecto
+Prompt:
+"Muy bien, indicame los comandos inciales para iniciar el proyecto e instalar todas las dependencias requeridas."
+Justificación: Proceso para iniciar con el desarrollo del proyecto y sus dependencias.
+Cita en el texto: (Google, 2026)
 
-# Getting Started
+Configurar herramientas y entorno de trabajo
+Prompt:
+“Listo, está en la nube. Procedamos con el siguiente paso del plan de ejecución. “
+Justificación: Finalizamos la estructura inicial del proyecto y procedemos con la configuración de los servicios.
+Cita en el texto: (Google, 2026)
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+Correcciones finales 
+Prompt:
+"¿Por qué la aplicación no retorna datos al buscar, es un problema de gitignore?"
+Justificación: Bloqueo de tráfico Cleartext (HTTP) por parte del sistema operativo Android.
+Cita en el texto: (Google, 2026)
 
-## Step 1: Start Metro
-
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
-
-To start the Metro dev server, run the following command from the root of your React Native project:
-
-```sh
-# Using npm
-npm start
-
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
