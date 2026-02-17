@@ -1,15 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-interface Place {
-    id: string | number;
-    title: string;
-    name?: string;
-    address?: { text: string };
-    category?: string;
-    website?: string;
-    url?: string;
-}
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { getPlaces, Place } from '../../api/client';
 
 interface PlacesState {
     list: Place[];
@@ -17,44 +7,29 @@ interface PlacesState {
     error: string | null;
 }
 
-// Define the initial state
 const initialState: PlacesState = {
     list: [],
     status: 'idle',
     error: null,
 };
 
-// Async thunk to fetch places
-// Using Nominatim OpenStreetMap API as a placeholder since no API was provided.
 export const fetchPlaces = createAsyncThunk(
     'places/fetchPlaces',
-    async ({ location, category, keyword }: { location: string; category: string; keyword: string }) => {
+    async ({ location, category, keyword }: { location?: string; category?: string; keyword?: string }, { rejectWithValue }) => {
         try {
-            // Construct query for Nominatim
-            // Note: This is a best-effort implementation to make the app functional.
-            const response = await axios.get(`https://nominatim.openstreetmap.org/search`, {
-                params: {
-                    q: `${keyword} ${category} ${location}`,
-                    format: 'json',
-                    addressdetails: 1,
-                    limit: 10
-                },
-                headers: {
-                    'User-Agent': 'TourismApp/1.0' // Nominatim requires User-Agent
-                }
-            });
+            const response = await getPlaces(location, category, keyword);
 
-            return response.data.map((item: any) => ({
-                id: item.place_id,
-                title: item.display_name.split(',')[0], // Simulating title
-                name: item.display_name,
-                address: { text: item.display_name },
-                category: item.type,
-                url: `https://www.openstreetmap.org/${item.osm_type}/${item.osm_id}`,
-                website: null
-            }));
+            // Lógica robusta para encontrar el array en la respuesta
+            if (Array.isArray(response)) {
+                return response;
+            } else if (response && Array.isArray(response.data)) {
+                return response.data;
+            } else {
+                console.warn("Estructura de respuesta inesperada:", response);
+                return [];
+            }
         } catch (error: any) {
-            throw error.response?.data || error.message;
+            return rejectWithValue(error.message || 'Error al conectar con el servidor');
         }
     }
 );
@@ -62,22 +37,29 @@ export const fetchPlaces = createAsyncThunk(
 const placesSlice = createSlice({
     name: 'places',
     initialState,
-    reducers: {},
+    reducers: {
+        clearPlaces: (state) => {
+            state.list = [];
+            state.status = 'idle';
+            state.error = null;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchPlaces.pending, (state) => {
                 state.status = 'loading';
+                state.error = null;
             })
-            .addCase(fetchPlaces.fulfilled, (state, action) => {
+            .addCase(fetchPlaces.fulfilled, (state, action: PayloadAction<Place[]>) => {
                 state.status = 'succeeded';
                 state.list = action.payload;
-                state.error = null;
             })
             .addCase(fetchPlaces.rejected, (state, action) => {
                 state.status = 'failed';
-                state.error = action.error.message || 'Error fetching places';
+                state.error = action.payload as string;
             });
     },
 });
 
+export const { clearPlaces } = placesSlice.actions;
 export default placesSlice.reducer;
