@@ -1,45 +1,47 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, { useEffect } from 'react';
+import { Provider } from 'react-redux';
+import { store } from './src/redux/store';
+import AppNavigator from './src/navigation/AppNavigator';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { setFavorites } from './src/redux/slices/favoritesSlice';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+// Componente Wrapper para manejar la carga inicial de datos
+const MainApp = () => {
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const jsonValue = await AsyncStorage.getItem('@favorites');
+        if (jsonValue != null) {
+          const savedFavorites = JSON.parse(jsonValue);
+          store.dispatch(setFavorites(savedFavorites));
+        }
+      } catch (e) {
+        console.error("Error cargando favoritos", e);
+      }
+    };
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+    loadData();
 
+    // Suscripción para guardar cambios automáticamente
+    const unsubscribe = store.subscribe(() => {
+      const state = store.getState();
+      const favorites = state.favorites.items;
+      AsyncStorage.setItem('@favorites', JSON.stringify(favorites))
+        .catch(err => console.error("Error guardando favoritos", err));
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  return <AppNavigator />;
+};
+
+const App = () => {
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
+    <Provider store={store}>
+      <MainApp />
+    </Provider>
   );
-}
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+};
 
 export default App;
