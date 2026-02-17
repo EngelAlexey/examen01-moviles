@@ -19,15 +19,29 @@ export const fetchPlaces = createAsyncThunk(
         try {
             const response = await getPlaces(location, category, keyword);
 
-            // Lógica robusta para encontrar el array en la respuesta
+            console.log('--- DEBUG API RESPONSE ---');
+            console.log('Keyword:', keyword);
+            console.log('Data:', JSON.stringify(response).substring(0, 500));
+
             if (Array.isArray(response)) {
                 return response;
-            } else if (response && Array.isArray(response.data)) {
-                return response.data;
-            } else {
-                console.warn("Estructura de respuesta inesperada:", response);
-                return [];
             }
+
+            if (response && Array.isArray(response.data)) {
+                return response.data;
+            }
+
+            if (response && Array.isArray(response.results)) {
+                return response.results;
+            }
+
+            if (response && typeof response === 'object' && (response.id || response.name || response.title)) {
+                console.log('Detectado objeto único, convirtiendo a array');
+                return [response];
+            }
+
+            console.warn("Estructura de respuesta no reconocida por el Slice:", response);
+            return [];
         } catch (error: any) {
             return rejectWithValue(error.message || 'Error al conectar con el servidor');
         }
