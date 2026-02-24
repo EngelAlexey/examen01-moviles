@@ -1,45 +1,49 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
-
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
-  );
-}
+import React, { useEffect } from 'react';
+import { StatusBar } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Provider, useDispatch } from 'react-redux';
+import { store } from './src/redux/store';
+import AppNavigator from './src/navigation/AppNavigator';
+import { getToken, getUserData, getCart } from './src/utils/storage';
+import { setAuth } from './src/redux/slices/authSlice';
+import { setCart } from './src/redux/slices/cartSlice';
 
 function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const initApp = async () => {
+      const token = await getToken();
+      const user = await getUserData();
+      const cartItems = await getCart();
+
+      if (token && user) {
+        dispatch(setAuth({ token, user }));
+      }
+      if (cartItems.length > 0) {
+        dispatch(setCart(cartItems));
+      }
+    };
+
+    initApp();
+  }, [dispatch]);
 
   return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
+    <>
+      <StatusBar barStyle="dark-content" />
+      <AppNavigator />
+    </>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+function App() {
+  return (
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <AppContent />
+      </SafeAreaProvider>
+    </Provider>
+  );
+}
 
 export default App;
