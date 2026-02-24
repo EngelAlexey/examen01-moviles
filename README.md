@@ -95,3 +95,24 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+
+Capturas:
+
+Inicio de sesión:
+<img width="505" height="1007" alt="image" src="https://github.com/user-attachments/assets/6e8339b6-55dc-45f4-bcc5-bf1649ece898" />
+
+Inicio:
+<img width="527" height="998" alt="image" src="https://github.com/user-attachments/assets/c923fba6-1ea6-41b9-ac84-983cc5509103" />
+
+Vista de detalles:
+<img width="552" height="1003" alt="image" src="https://github.com/user-attachments/assets/62ebc70f-18aa-4a99-883c-0107a65f961c" />
+
+Añadido al carrito:
+<img width="516" height="1002" alt="image" src="https://github.com/user-attachments/assets/9c3e47be-f44a-4b72-a38c-d4d2206d1e0b" />
+
+Carrito de compras:
+<img width="519" height="1001" alt="image" src="https://github.com/user-attachments/assets/ba760a8c-3bcb-4a2b-a629-2018fbb1621e" />
+
+Compra éxitosa:
+<img width="520" height="1008" alt="image" src="https://github.com/user-attachments/assets/4de37a0b-e0d6-49aa-a6c4-ce53dcf777a3" />
