@@ -12,10 +12,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
 import { removeFromCart, clearCart } from '../redux/slices/cartSlice';
 
+// Cart screen component displaying added items and total amount
 const CartScreen = ({ navigation }: any) => {
     const { items, totalAmount } = useSelector((state: RootState) => state.cart);
     const dispatch = useDispatch();
 
+    // Handles the payment confirmation and layout transition
     const handlePayment = () => {
         Alert.alert(
             "Confirmar Pago",
@@ -34,6 +36,7 @@ const CartScreen = ({ navigation }: any) => {
         );
     };
 
+    // Renders individual cart item
     const renderItem = ({ item }: { item: any }) => (
         <View style={styles.cartItem}>
             <Image source={{ uri: item.image }} style={styles.itemImage} resizeMode="contain" />

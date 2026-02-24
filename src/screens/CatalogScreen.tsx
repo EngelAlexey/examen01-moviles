@@ -14,6 +14,7 @@ import ProductCard from '../components/ProductCard';
 import Footer from '../components/Footer';
 import { addToCart } from '../redux/slices/cartSlice';
 
+// Catalog screen component displaying products and category filters
 const CatalogScreen = ({ navigation }: any) => {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -25,6 +26,7 @@ const CatalogScreen = ({ navigation }: any) => {
         fetchData();
     }, []);
 
+    // Fetches all products and categories from the API
     const fetchData = async () => {
         setLoading(true);
         try {
@@ -45,6 +47,7 @@ const CatalogScreen = ({ navigation }: any) => {
         ? products
         : products.filter((p: any) => p.category === selectedCategory);
 
+    // Renders individual product card component
     const renderProduct = ({ item }: { item: any }) => (
         <ProductCard
             product={item}

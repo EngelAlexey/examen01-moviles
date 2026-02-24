@@ -7,6 +7,7 @@ interface ProductCardProps {
     onAddToCart: () => void;
 }
 
+// Reusable component to display a summary card for a product
 const ProductCard = ({ product, onPress, onAddToCart }: ProductCardProps) => {
     return (
         <TouchableOpacity style={styles.container} onPress={onPress}>

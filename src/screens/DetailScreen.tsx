@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import api from '../api';
 import { addToCart } from '../redux/slices/cartSlice';
 
+// Detail screen component showing specific product information
 const DetailScreen = ({ route }: any) => {
     const { productId } = route.params;
     const [product, setProduct] = useState<any>(null);
@@ -22,6 +23,7 @@ const DetailScreen = ({ route }: any) => {
         fetchProduct();
     }, [productId]);
 
+    // Fetches specific product data from the API
     const fetchProduct = async () => {
         try {
             const response = await api.get(`/products/${productId}`);

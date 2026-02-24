@@ -1,3 +1,4 @@
+// Utility functions for local asynchronous storage management
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const STORAGE_KEYS = {
@@ -6,6 +7,7 @@ const STORAGE_KEYS = {
     CART: '@cart_items',
 };
 
+// Saves authentication token to local storage
 export const saveToken = async (token: string) => {
     try {
         await AsyncStorage.setItem(STORAGE_KEYS.TOKEN, token);
@@ -14,6 +16,7 @@ export const saveToken = async (token: string) => {
     }
 };
 
+// Retrieves authentication token from local storage
 export const getToken = async () => {
     try {
         return await AsyncStorage.getItem(STORAGE_KEYS.TOKEN);
@@ -23,6 +26,7 @@ export const getToken = async () => {
     }
 };
 
+// Saves user data to local storage
 export const saveUserData = async (userData: any) => {
     try {
         await AsyncStorage.setItem(STORAGE_KEYS.USER_DATA, JSON.stringify(userData));
@@ -31,6 +35,7 @@ export const saveUserData = async (userData: any) => {
     }
 };
 
+// Retrieves user data from local storage
 export const getUserData = async () => {
     try {
         const data = await AsyncStorage.getItem(STORAGE_KEYS.USER_DATA);
@@ -41,6 +46,7 @@ export const getUserData = async () => {
     }
 };
 
+// Saves cart items to local storage
 export const saveCart = async (cartItems: any[]) => {
     try {
         await AsyncStorage.setItem(STORAGE_KEYS.CART, JSON.stringify(cartItems));
@@ -49,6 +55,7 @@ export const saveCart = async (cartItems: any[]) => {
     }
 };
 
+// Retrieves cart items from local storage
 export const getCart = async () => {
     try {
         const data = await AsyncStorage.getItem(STORAGE_KEYS.CART);
@@ -59,6 +66,7 @@ export const getCart = async () => {
     }
 };
 
+// Clears authentication data from local storage
 export const clearAuthStorage = async () => {
     try {
         await AsyncStorage.removeItem(STORAGE_KEYS.TOKEN);
@@ -68,6 +76,7 @@ export const clearAuthStorage = async () => {
     }
 };
 
+// Clears cart data from local storage
 export const clearCartStorage = async () => {
     try {
         await AsyncStorage.removeItem(STORAGE_KEYS.CART);

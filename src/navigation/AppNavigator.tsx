@@ -11,6 +11,7 @@ import CartScreen from '../screens/CartScreen';
 
 const Stack = createNativeStackNavigator();
 
+// Main application navigator handling screen routing and authentication state
 const AppNavigator = () => {
     const { isAuthenticated } = useSelector((state: RootState) => state.auth);
 

@@ -15,12 +15,14 @@ import { loginStart, loginSuccess, loginFailure } from '../redux/slices/authSlic
 import { RootState } from '../redux/store';
 import api from '../api';
 
+// Login screen component for user authentication
 const LoginScreen = () => {
     const [username, setUsername] = useState('johnd');
     const [password, setPassword] = useState('m38rmF$');
     const dispatch = useDispatch();
     const { loading } = useSelector((state: RootState) => state.auth);
 
+    // Handles the login process and API request
     const handleLogin = async () => {
         if (!username || !password) {
             Alert.alert('Error', 'Por favor ingrese usuario y contraseña');
